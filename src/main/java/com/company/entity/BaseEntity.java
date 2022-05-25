@@ -4,13 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@MappedSuperclass
 public class BaseEntity {
     @Id
     @GeneratedValue(generator="system-uuid")
@@ -18,7 +17,7 @@ public class BaseEntity {
     private String id;
 
     @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    private LocalDateTime createdDate=LocalDateTime.now();
     @Column(name = "updated_date")
     private LocalDateTime updatedDAte;
 }
