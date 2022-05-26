@@ -1,5 +1,5 @@
 package com.company.enums;
 
-public enum ClientStatus {
+public enum Status {
     ACTIVE,NOTACTIVE,BLOCK,DELETED
 }

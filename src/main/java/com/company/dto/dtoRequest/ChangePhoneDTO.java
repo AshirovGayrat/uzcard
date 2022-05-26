@@ -8,11 +8,8 @@ import javax.validation.constraints.Size;
 
 @Getter
 @Setter
-public class ClientRequestDTO {
+public class ChangePhoneDTO {
     @NotNull
-    @Size(min = 3, max = 25, message = "name or surname not valid")
-    private String name, surname;
-
-    @Size(min = 13, max = 13, message = "Phone not valid")
+    @Size(min = 13, max = 13)
     private String phone;
 }

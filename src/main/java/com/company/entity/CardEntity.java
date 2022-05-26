@@ -1,12 +1,10 @@
 package com.company.entity;
 
-import com.company.enums.CardStatus;
+import com.company.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -14,13 +12,22 @@ import java.time.LocalDate;
 @Setter
 @Table(name = "card_table")
 public class CardEntity extends BaseEntity {
-
+    @Column(unique = true)
     private String number;
+
     private Long balance;
-    @Column(name = "client_id")
-    private Long clientId;
     private String phone;
-    private CardStatus status;
+
+    @Column(name = "client_id")
+    private String clientId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", insertable = false, updatable = false)
+    private ClientEntity client;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @Column(name = "expired_date")
     private LocalDate expiredDate;
+
+    private String profileUserName;
 }
