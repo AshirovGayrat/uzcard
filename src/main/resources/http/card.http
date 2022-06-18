@@ -1,3 +1,33 @@
 
-POST http://localhost:8080/card/create
+###create
+POST http://localhost:8080/api/v1/card/ff80808181100d300181100e7a290001
 Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+###assign phone
+PUT http://localhost:8080/api/v1/card/ff80808181100d30018110170ffb0004
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+{
+  "phone": "+998905555555"
+}
+
+###get card list by client id
+GET http://localhost:8080/api/v1/card/ff80808181100d300181100e7a290001
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+### GET BALANCE BY NUMBER
+GET http://localhost:8080/api/v1/card/balance/8600210281825762
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+### filter
+POST http://localhost:8080/api/v1/card/filter
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+{
+  "phone": "+998905555555"
+}

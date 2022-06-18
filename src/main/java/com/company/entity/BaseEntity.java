@@ -12,12 +12,17 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class BaseEntity {
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    private String  id;
+
 
     @Column(name = "created_date")
     private LocalDateTime createdDate=LocalDateTime.now();
+
     @Column(name = "updated_date")
     private LocalDateTime updatedDAte;
+
+    @Column(name = "profile_user_name)")
+    private String profileUserName;
 }

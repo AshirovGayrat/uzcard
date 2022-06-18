@@ -3,6 +3,7 @@ package com.company.service;
 import com.company.dto.dtoRequest.ChangePhoneDTO;
 import com.company.dto.dtoRequest.ChangeStatusDTO;
 import com.company.dto.dtoRequest.ClientRequestDTO;
+import com.company.dto.dtoRequest.ClientUpdateDTO;
 import com.company.dto.dtoResponce.ClientResponceDTO;
 import com.company.entity.ClientEntity;
 import com.company.enums.Status;
@@ -14,7 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,29 +25,28 @@ import java.util.List;
 public class ClientService {
     private final ClientRepository clientRepository;
 
-    public ClientResponceDTO create(ClientRequestDTO dto) {
-//        if (getActiveByPhone(dto.getPhone()) != null) {
-//            log.info("Client create: {}", dto);
-//            throw new ItemAlreadyExistsException("Phone already exists!");
-//        }
+    public ClientResponceDTO create(ClientRequestDTO dto, Principal principal) {
         ClientEntity entity = new ClientEntity();
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setPhone(dto.getPhone());
         entity.setStatus(Status.ACTIVE);
+        entity.setProfileUserName(principal.getName());
         clientRepository.save(entity);
         return toDto(entity);
     }
 
-    public ClientResponceDTO update(String id, ClientRequestDTO dto) {
+    public ClientResponceDTO update(String id, ClientUpdateDTO dto) {
         ClientEntity entity = getActiveById(id);
-        if (getActiveByPhone(dto.getPhone()) != null) {
-            log.info("Client create: {}", dto);
-            throw new ItemAlreadyExistsException("Phone already exists!");
+        if (dto.getName() != null) {
+            entity.setName(dto.getName());
         }
-        entity.setName(dto.getName());
-        entity.setSurname(dto.getSurname());
-        entity.setPhone(dto.getPhone());
+        if (dto.getSurname() != null) {
+            entity.setSurname(dto.getSurname());
+        }
+        if (dto.getPhone() != null) {
+            entity.setPhone(dto.getPhone());
+        }
         clientRepository.save(entity);
         return toDto(entity);
     }
@@ -72,11 +74,6 @@ public class ClientService {
                 .orElseThrow(() -> new ItemNotFoundException("Client does not exists"));
     }
 
-    public ClientEntity getActiveByPhone(String phone) {
-        return clientRepository.findByPhoneAndStatus(phone, Status.ACTIVE)
-                .orElseThrow(() -> new ItemNotFoundException("Client does not exists"));
-    }
-
     public ClientResponceDTO toDto(ClientEntity entity) {
         ClientResponceDTO dto = new ClientResponceDTO();
         dto.setId(entity.getId());
@@ -88,12 +85,12 @@ public class ClientService {
     }
 
     //ADMIN//
-    public ClientResponceDTO getDtoById(String id){
+    public ClientResponceDTO getDtoById(String id) {
         return toDto(getActiveById(id));
     }
 
     public PageImpl<ClientResponceDTO> getAllWithPagination(int page, int size) {
-        Pageable pageable= PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdDate"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdDate"));
 
         Page<ClientEntity> clientPage = clientRepository.findAll(pageable);
 

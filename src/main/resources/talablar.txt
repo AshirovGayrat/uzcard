@@ -26,7 +26,6 @@
 4. Profile all in memory - roles: Profile (apelsin,payme), Bank (all banks), Admin
 
 ****** API ******
-
 1. Client
     1. Create  (BANK)
     2. Update (except phone) (BANK)
@@ -51,7 +50,7 @@
     2. Get Transaction pagination cardId (BANK,CLIENT)
     3. Get transaction pagination  by client_id (BANK,CLIENT)
     4. Get transaction pagination by phone (active phone) (BANK,CLIENT)
-    5. Get transaction pagination by profile_name (BANK,CLIENT)
+    5. Get transaction pagination by profile_name (BANK,CLIENT)///
     6. Filter by: (ADMIN)
         client_id,cardNumber,cardId, amount (from_amount - to_amount),
             created_date (from_date, to_date), profile_name,status
@@ -59,6 +58,7 @@
     TransactionIfo
         id,fromCard{id,number,phone,client{id,name,surname}},
         ToCard{id,number,phone,client{id,name,surname}}, amount,createdDate,Status,
+
       Muhim-> cardNumber should be hidden  8600-****-****-1212
 
 4. Log

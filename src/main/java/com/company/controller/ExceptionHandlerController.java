@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class ExceptionHandlerController {
 
-    @ExceptionHandler({EmailAlreadyExistsException.class, ItemNotFoundException.class,
-            AppBadRequestException.class, RegionAlreadyExistsException.class,
-            PasswordOrEmailWrongException.class, ItemAlreadyExistsException.class})
+    @ExceptionHandler({ItemNotFoundException.class,
+            AppBadRequestException.class,ItemAlreadyExistsException.class, BalanceNotEnaughException.class})
     public ResponseEntity<?> handleBadRequestException(RuntimeException e) {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
@@ -19,10 +18,5 @@ public class ExceptionHandlerController {
     @ExceptionHandler({AppForbiddenException.class})
     public ResponseEntity<?> handleForbidden(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-    }
-
-    @ExceptionHandler({TokenNotValidException.class})
-    public ResponseEntity<?> mazgi(TokenNotValidException e) {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
     }
 }

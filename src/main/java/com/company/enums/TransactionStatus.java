@@ -1,5 +1,5 @@
 package com.company.enums;
 
 public enum TransactionStatus {
-    SUCCESS,FAILED
+    SUCCESS,FAILED,DELETED
 }

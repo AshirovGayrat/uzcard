@@ -20,14 +20,12 @@ public class CardEntity extends BaseEntity {
 
     @Column(name = "client_id")
     private String clientId;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", insertable = false, updatable = false)
     private ClientEntity client;
 
     @Enumerated(EnumType.STRING)
     private Status status;
     @Column(name = "expired_date")
-    private LocalDate expiredDate;
-
-    private String profileUserName;
+    private LocalDate expiredDate=LocalDate.now().plusYears(2);
 }

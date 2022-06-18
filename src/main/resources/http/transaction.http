@@ -1,0 +1,33 @@
+###
+POST http://localhost:8080/api/v1/transaction
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+{
+  "fromCard": "8600210281825762",
+  "toCard": "8600309504484584",
+  "amount": 200
+}
+
+###get pagination by client id
+GET http://localhost:8080/api/v1/transaction/pagination/ff80808181100d300181100e7a290001
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+###filter
+GET http://localhost:8080/api/v1/transaction/filter
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+{
+  "clientId": "ff80808181100d300181100ec79f0002"
+}
+
+###filter with jp query
+GET http://localhost:8080/api/v1/transaction/filter/jp
+Content-Type: application/json
+Authorization: Basic bankjon bankov
+
+{
+  "clientId": "ff80808181100d300181100ec79f0002"
+}

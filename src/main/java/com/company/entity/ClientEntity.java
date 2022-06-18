@@ -4,13 +4,12 @@ import com.company.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@Table(name = "client_table")
 public class ClientEntity extends BaseEntity{
     private String name, surname;
 
@@ -18,5 +17,4 @@ public class ClientEntity extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     private Status status;
-    private String profileUserName;
 }
